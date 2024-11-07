@@ -1,9 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import time
-from lxml import etree
 
 url = 'https://www.sofascore.com/player/compare?leftPlayerId=847983&leftPlayerSeasonId=63814&leftPlayerTournamentId=52'
 
