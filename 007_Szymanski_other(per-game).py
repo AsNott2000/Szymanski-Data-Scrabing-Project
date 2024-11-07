@@ -56,4 +56,5 @@ was_fouls = others_box.find_all("span", class_="Text bcSQzO")[8]
 print(was_fouls_text.text)
 print(was_fouls.text)
 
+
 print("_____________")
