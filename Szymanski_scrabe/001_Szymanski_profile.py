@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.action_chains import ActionChains
 import time
+import pandas as pd
 from lxml import etree
 
 url = 'https://www.sofascore.com/player/compare?leftPlayerId=847983&leftPlayerSeasonId=63814&leftPlayerTournamentId=52'
@@ -17,56 +18,40 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "lxml")
 
+#name data
 tree = etree.HTML(str(soup))
 name = tree.xpath("//div[@class='Box laCmrf']//div[@class='Box Flex ggRYVx iBFqQc']//a//span[@class='Text dypXRD']")[0]
-print(name.text)
 
-print("____________________")
-
+#age data
 age_text_box = soup.find_all("div", class_="Box Flex PAHTS hhKRyf")[0]
 age_text = age_text_box.find_all("span")[0]
 age = age_text_box.find_all("span")[1]
 
-print(age_text.text)
-print(age.text)
-
-print("____________________")
-
+#height data
 height_text_box = soup.find_all("div", class_="Box Flex PAHTS hhKRyf")[1]
 height_text = height_text_box.find_all("span")[0]
 height = height_text_box.find_all("span")[1]
 
-print(height_text.text)
-print(height.text)
-
-print("____________________")
-
+#cost data
 market_value_box = soup.find_all("div", class_="Box Flex PAHTS hhKRyf")[2]
 market_value_text = market_value_box.find_all("span")[0]
 market_value = market_value_box.find_all("span")[1]
 
-print(market_value_text.text)
-print(market_value.text)
-
-print("____________________")
-
+#team data
 team_box = soup.find_all("div", class_="Box Flex favGhB hhKRyf")[0]
 team_text = team_box.find_all("span")[0]
 team = team_box.find_all("span")[1]
 
-print(team_text.text)
-print(team.text)
-
-print("____________________")
-
+#rating data
 sofa_rating_box = soup.find("div", class_ ="Box Flex kGzwJG bnpRyo")
 sofa_rating_text = sofa_rating_box.find("span", class_="Text gHLcGU")
-
 sofa_rate_box = sofa_rating_box.find_all("div", class_="Box Flex hVZxjR cQgcrM")[0]
 sofa_rate = sofa_rate_box.find("span")
 
-print(sofa_rating_text.text)
-print(sofa_rate.text)
+texts = ["Name", age_text.text, height_text.text,market_value_text.text, team_text.text, sofa_rating_text.text]
+indexes = [name.text, age.text, height.text,market_value.text, team.text, sofa_rate.text]
 
-
+df = pd.DataFrame([indexes], columns = texts)
+df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Szymanski_datas/profile.csv', index=False)
 #excele kaydedilecek
+

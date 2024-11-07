@@ -1,3 +1,4 @@
+import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
@@ -18,35 +19,25 @@ defending_box = defending_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
 
 interceptions_text = defending_box.find_all("span", class_="Text eYrCMI")[0]
 interceptions = defending_box.find_all("span", class_="Text bcSQzO")[0]
-print(interceptions_text.text)
-print(interceptions.text)
 
-print("_____________")
 
 tackles_text = defending_box.find_all("span", class_="Text eYrCMI")[1]
 tackles = defending_box.find_all("span", class_="Text bcSQzO")[2]
-print(tackles_text.text)
-print(tackles.text)
 
-print("_____________")
 
 dribbled_past_text = defending_box.find_all("span", class_="Text eYrCMI")[2]
 dribbled_past = defending_box.find_all("span", class_="Text bcSQzO")[4]
-print(dribbled_past_text.text)
-print(dribbled_past.text)
 
-print("_____________")
 
 clearances_text = defending_box.find_all("span", class_="Text eYrCMI")[3]
 clearances = defending_box.find_all("span", class_="Text bcSQzO")[6]
-print(clearances_text.text)
-print(clearances.text)
 
-print("_____________")
 
 blocked_shots_text = defending_box.find_all("span", class_="Text eYrCMI")[4]
 blocked_shots = defending_box.find_all("span", class_="Text bcSQzO")[6]
-print(blocked_shots_text.text)
-print(blocked_shots.text)
 
-print("_____________")
+texts = [ interceptions_text.text, tackles_text.text,dribbled_past_text.text, clearances_text.text, blocked_shots_text.text]
+indexes = [interceptions.text, tackles.text, dribbled_past.text,clearances.text, blocked_shots.text]
+
+df = pd.DataFrame([indexes], columns=texts)
+df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Szymanski_datas/defending.csv', index=False)
