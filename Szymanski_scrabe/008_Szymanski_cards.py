@@ -14,23 +14,24 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "html.parser")
 
-cards_soup = soup.find_all("div", class_="Box dFSJzk")[7]
-cards_box = cards_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
 
-yellow_text = cards_box.find_all("span", class_="Text eYrCMI")[0]
-yellow = cards_box.find_all("span", class_="Text bcSQzO")[0]
-
-
-yellow_red_text = cards_box.find_all("span", class_="Text eYrCMI")[1]
-yellow_red = cards_box.find_all("span", class_="Text bcSQzO")[2]
+def extract_match_data(soup, text_index, value_index):
+    cards_soup = soup.find_all("div", class_="Box dFSJzk")[7]
+    cards_box = cards_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+    label = cards_box.find_all("span", class_="Text eYrCMI")[text_index].text
+    value = cards_box.find_all("span", class_="Text bcSQzO")[value_index].text
+    return label, value
 
 
-red_text = cards_box.find_all("span", class_="Text eYrCMI")[2]
-red = cards_box.find_all("span", class_="Text bcSQzO")[4]
+yellow_text, yellow = extract_match_data(soup, 0, 0)
+yellow_red_text, yellow_red = extract_match_data(soup, 1, 2)
+red_text, red = extract_match_data(soup, 2, 4)
 
-
-texts = [ yellow_text.text, yellow_red_text.text,red_text.text]
-indexes = [yellow.text, yellow_red.text, red.text]
+texts = [yellow_text, yellow_red_text, red_text]
+indexes = [yellow, yellow_red, red]
 
 df = pd.DataFrame([indexes], columns=texts)
-df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Szymanski_datas/discipline.csv', index=False)
+df.to_csv(
+    'C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing '
+    'Project/Excel_Files/Szymanski_datas/discipline.csv',
+    index=False)

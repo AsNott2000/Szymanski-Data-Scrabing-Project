@@ -14,34 +14,22 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "html.parser")
 
-outhers_soup = soup.find_all("div", class_="Box dFSJzk")[6]
-others_box = outhers_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+def extract_match_data(soup, text_index, value_index):
+    other_soup = soup.find_all("div", class_="Box dFSJzk")[6]
+    other_box = other_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+    label = other_box.find_all("span", class_="Text eYrCMI")[text_index].text
+    value = other_box.find_all("span", class_="Text bcSQzO")[value_index].text
+    return label, value
 
-succ_dribbles_text = others_box.find_all("span", class_="Text eYrCMI")[0]
-succ_dribbles = others_box.find_all("span", class_="Text bcSQzO")[0]
+succ_dribbles_text, succ_dribbles = extract_match_data(soup, 0,0)
+ground_duels_won_text, ground_duels_won = extract_match_data(soup, 1,2)
+aerial_duels_won_text, aerial_duels_won = extract_match_data(soup, 2,4)
+posession_lost_text, posession_lost = extract_match_data(soup, 3,6)
+fouls_text, fouls = extract_match_data(soup, 4,8)
+was_fouls_text, was_fouls = extract_match_data(soup, 5,10)
 
-
-ground_duels_won_text = others_box.find_all("span", class_="Text eYrCMI")[1]
-ground_duels_won = others_box.find_all("span", class_="Text bcSQzO")[2]
-
-
-aerial_duels_won_text = others_box.find_all("span", class_="Text eYrCMI")[2]
-aerial_duels_won = others_box.find_all("span", class_="Text bcSQzO")[4]
-
-
-posession_lost_text = others_box.find_all("span", class_="Text eYrCMI")[3]
-posession_lost = others_box.find_all("span", class_="Text bcSQzO")[6]
-
-
-fouls_text = others_box.find_all("span", class_="Text eYrCMI")[4]
-fouls = others_box.find_all("span", class_="Text bcSQzO")[6]
-
-
-was_fouls_text = others_box.find_all("span", class_="Text eYrCMI")[5]
-was_fouls = others_box.find_all("span", class_="Text bcSQzO")[8]
-
-texts = [ succ_dribbles_text.text, ground_duels_won_text.text,aerial_duels_won_text.text, posession_lost_text.text,fouls_text.text, was_fouls_text.text]
-indexes = [succ_dribbles.text, ground_duels_won.text, aerial_duels_won.text,posession_lost.text, fouls.text, was_fouls.text]
+texts = [ succ_dribbles_text, ground_duels_won_text,aerial_duels_won_text, posession_lost_text,fouls_text, was_fouls_text]
+indexes = [succ_dribbles, ground_duels_won, aerial_duels_won,posession_lost, fouls, was_fouls]
 
 df = pd.DataFrame([indexes], columns=texts)
 df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Mertens_datas/others.csv', index=False)

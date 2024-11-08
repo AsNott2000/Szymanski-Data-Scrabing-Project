@@ -34,13 +34,13 @@ posession_lost = others_box.find_all("span", class_="Text bcSQzO")[6]
 
 
 fouls_text = others_box.find_all("span", class_="Text eYrCMI")[4]
-fouls = others_box.find_all("span", class_="Text bcSQzO")[6]
+fouls = others_box.find_all("span", class_="Text bcSQzO")[8]
 
 
 was_fouls_text = others_box.find_all("span", class_="Text eYrCMI")[5]
-was_fouls = others_box.find_all("span", class_="Text bcSQzO")[8]
+was_fouls = others_box.find_all("span", class_="Text bcSQzO")[10]
 
-texts = [ succ_dribbles_text.text, ground_duels_won_text.text,aerial_duels_won_text.text, posession_lost_text.text,fouls_text.text, was_fouls_text.text]
+texts = [succ_dribbles_text.text, ground_duels_won_text.text,aerial_duels_won_text.text, posession_lost_text.text,fouls_text.text, was_fouls_text.text]
 indexes = [succ_dribbles.text, ground_duels_won.text, aerial_duels_won.text,posession_lost.text, fouls.text, was_fouls.text]
 
 df = pd.DataFrame([indexes], columns=texts)

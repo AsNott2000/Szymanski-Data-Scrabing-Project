@@ -14,35 +14,23 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "html.parser")
 
-passes_soup = soup.find_all("div", class_="Box dFSJzk")[4]
-passes_box = passes_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+def extract_match_data(soup, text_index, value_index):
+    passes_soup = soup.find_all("div", class_="Box dFSJzk")[4]
+    passes_box = passes_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+    label = passes_box.find_all("span", class_="Text eYrCMI")[text_index].text
+    value = passes_box.find_all("span", class_="Text bcSQzO")[value_index].text
+    return label, value
 
-assists_text = passes_box.find_all("span", class_="Text eYrCMI")[0]
-assists = passes_box.find_all("span", class_="Text bcSQzO")[0]
-
-
-assists_per_game_text = passes_box.find_all("span", class_="Text eYrCMI")[1]
-assists_per_game = passes_box.find_all("span", class_="Text bcSQzO")[2]
-
-
-xa_text = passes_box.find_all("span", class_="Text eYrCMI")[2]
-xa = passes_box.find_all("span", class_="Text bcSQzO")[4]
-
-
-Big_chances_created_text = passes_box.find_all("span", class_="Text eYrCMI")[3]
-Big_chances_created = passes_box.find_all("span", class_="Text bcSQzO")[6]
+assists_text, assists = extract_match_data(soup, 0,0)
+assists_per_game_text, assists_per_game = extract_match_data(soup, 1,2)
+xa_text, xa = extract_match_data(soup, 2,4)
+Big_chances_created_text, Big_chances_created = extract_match_data(soup, 3,6)
+long_balls_text, long_balls = extract_match_data(soup, 4,8)
+crosses_text, crosses = extract_match_data(soup, 5,10)
 
 
-long_balls_text = passes_box.find_all("span", class_="Text eYrCMI")[4]
-long_balls = passes_box.find_all("span", class_="Text bcSQzO")[8]
-
-
-crosses_text = passes_box.find_all("span", class_="Text eYrCMI")[5]
-crosses = passes_box.find_all("span", class_="Text bcSQzO")[10]
-
-
-texts = [ assists_text.text, assists_per_game_text.text,xa_text.text, Big_chances_created_text.text, long_balls_text.text, crosses_text.text]
-indexes = [assists.text, assists_per_game.text, xa.text,Big_chances_created.text, long_balls.text, crosses.text]
+texts = [assists_text, assists_per_game_text,xa_text, Big_chances_created_text, long_balls_text, crosses_text]
+indexes = [assists, assists_per_game, xa,Big_chances_created, long_balls, crosses]
 
 df = pd.DataFrame([indexes], columns=texts)
 df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Mertens_datas/passes.csv', index=False)

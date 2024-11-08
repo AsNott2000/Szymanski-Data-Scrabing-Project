@@ -3,7 +3,56 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\Excel_Files\Mertens_datas\attacking.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Mertens_datas\defending.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Mertens_datas\discipline.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Mertens_datas\matches.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Mertens_datas\others.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Mertens_datas\passes.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Excel_Files\Mertens_datas\profile.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Szymanski_datas\aaaa.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -46,6 +95,13 @@
           </value>
         </entry>
         <entry key="\Excel_Files\Szymanski_datas\passes.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Szymanski_datas\pppppp.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

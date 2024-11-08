@@ -14,23 +14,29 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "html.parser")
 
-matches_soup = soup.find_all("div", class_="Box dFSJzk")[2]
-matches_box = matches_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+"""
+    Belirtilen indexlere göre maç istatistiklerini çeker.
+    Parameters:
+        - soup: BeautifulSoup nesnesi
+        - text_index: İstatistik başlığı için kullanılan index
+        - value_index: İstatistik değeri için kullanılan index
+    Returns:
+        - label, value: Başlık ve değeri döndürür
+    """
+def extract_match_data(soup, text_index, value_index):
+    matches_soup = soup.find_all("div", class_="Box dFSJzk")[2]
+    matches_box = matches_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+    label = matches_box.find_all("span", class_="Text eYrCMI")[text_index].text
+    value = matches_box.find_all("span", class_="Text bcSQzO")[value_index].text
+    return label, value
 
 
-min_per_game_text = matches_box.find_all("span", class_="Text eYrCMI")[0]
-min_per_game = matches_box.find_all("span", class_="Text bcSQzO")[0]
+min_per_game_text, min_per_game = extract_match_data(soup, 0,0)
+total_min_play_text, total_min_play = extract_match_data(soup, 1, 2)
+appereances_text, appereances = extract_match_data(soup, 2,4)
 
+texts = [min_per_game_text, total_min_play_text, appereances_text]
+indexes = [min_per_game, total_min_play, appereances]
 
-total_min_play_text = matches_box.find_all("span", class_="Text eYrCMI")[1]
-total_min_play = matches_box.find_all("span", class_="Text bcSQzO")[2]
-
-
-appereances_text = matches_box.find_all("span", class_="Text eYrCMI")[2]
-appereances = matches_box.find_all("span", class_="Text bcSQzO")[4]
-
-texts = [min_per_game_text.text, total_min_play_text.text, appereances_text.text]
-indexes = [min_per_game.text, total_min_play.text, appereances.text]
-
-df = pd.DataFrame([indexes], columns = texts)
+df = pd.DataFrame([indexes], columns=texts)
 df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Szymanski_datas/matches.csv', index=False)

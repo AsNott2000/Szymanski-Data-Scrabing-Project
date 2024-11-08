@@ -14,30 +14,21 @@ html = driver.page_source
 
 soup = BeautifulSoup(html, "html.parser")
 
-defending_soup = soup.find_all("div", class_="Box dFSJzk")[5]
-defending_box = defending_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+def extract_match_data(soup, text_index, value_index):
+    defending_soup = soup.find_all("div", class_="Box dFSJzk")[5]
+    defending_box = defending_soup.find("div", class_="Box Flex ggRYVx cRYpNI")
+    label = defending_box.find_all("span", class_="Text eYrCMI")[text_index].text
+    value = defending_box.find_all("span", class_="Text bcSQzO")[value_index].text
+    return label, value
 
-interceptions_text = defending_box.find_all("span", class_="Text eYrCMI")[0]
-interceptions = defending_box.find_all("span", class_="Text bcSQzO")[0]
+interceptions_text, interceptions = extract_match_data(soup, 0,0)
+tackles_text, tackles = extract_match_data(soup, 1,2)
+dribbled_past_text, dribbled_past = extract_match_data(soup, 2,4)
+clearances_text, clearances = extract_match_data(soup, 3,6)
+blocked_shots_text, blocked_shots = extract_match_data(soup, 4,8)
 
-
-tackles_text = defending_box.find_all("span", class_="Text eYrCMI")[1]
-tackles = defending_box.find_all("span", class_="Text bcSQzO")[2]
-
-
-dribbled_past_text = defending_box.find_all("span", class_="Text eYrCMI")[2]
-dribbled_past = defending_box.find_all("span", class_="Text bcSQzO")[4]
-
-
-clearances_text = defending_box.find_all("span", class_="Text eYrCMI")[3]
-clearances = defending_box.find_all("span", class_="Text bcSQzO")[6]
-
-
-blocked_shots_text = defending_box.find_all("span", class_="Text eYrCMI")[4]
-blocked_shots = defending_box.find_all("span", class_="Text bcSQzO")[6]
-
-texts = [ interceptions_text.text, tackles_text.text,dribbled_past_text.text, clearances_text.text, blocked_shots_text.text]
-indexes = [interceptions.text, tackles.text, dribbled_past.text,clearances.text, blocked_shots.text]
+texts = [ interceptions_text, tackles_text,dribbled_past_text, clearances_text, blocked_shots_text]
+indexes = [interceptions, tackles, dribbled_past,clearances, blocked_shots]
 
 df = pd.DataFrame([indexes], columns=texts)
 df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Mertens_datas/defending.csv', index=False)
