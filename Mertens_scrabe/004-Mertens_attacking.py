@@ -26,20 +26,23 @@ shoots_on_target_box = shoots_target_box.find("div", class_="Box Flex bgBPpJ pwo
 shoots_on_target_text = shoots_on_target_box.find_all("span")[0]
 shoots_on_target = shoots_on_target_box.find_all("span")[1]
 
+
 def extract_match_data(soup, text_index, value_index):
     label = attacking_box.find_all("span", class_="Text eYrCMI")[text_index].text
     value = attacking_box.find_all("span", class_="Text bcSQzO")[value_index].text
     return label, value
 
-goals_text, goals = extract_match_data(soup, 0,0)
-xg_text, xg = extract_match_data(soup, 1,2)
-goals_per_game_text, goals_per_game = extract_match_data(soup, 2,4)
-Big_chance_missed_text, Big_chance_missed = extract_match_data(soup, 3,6)
 
+goals_text, goals = extract_match_data(soup, 0, 0)
+xg_text, xg = extract_match_data(soup, 1, 2)
+goals_per_game_text, goals_per_game = extract_match_data(soup, 2, 4)
+Big_chance_missed_text, Big_chance_missed = extract_match_data(soup, 3, 6)
 
-
-texts = [ goals_text, xg_text, goals_per_game_text, shoots_off_target_text.text, shoots_on_target_text.text,Big_chance_missed_text]
-indexes = [goals, xg, goals_per_game,shoots_off_target.text, shoots_on_target.text, Big_chance_missed]
+texts = [goals_text, xg_text, goals_per_game_text, shoots_off_target_text.text, shoots_on_target_text.text,
+         Big_chance_missed_text]
+indexes = [goals, xg, goals_per_game, shoots_off_target.text, shoots_on_target.text, Big_chance_missed]
 
 df = pd.DataFrame([indexes], columns=texts)
-df.to_csv('C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Mertens_datas/attacking.csv', index=False)
+df.to_csv(
+    'C:/Users/nurul/OneDrive/Masaüstü/Main DEV/Backend/Python/Szymanski Data Scrabing Project/Excel_Files/Mertens_datas/attacking.csv',
+    index=False)

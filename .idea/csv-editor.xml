@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Excel_Files\Mertens_datas\mathces.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Excel_Files\Mertens_datas\others.csv">
           <value>
             <Attribute>
@@ -53,6 +60,13 @@
           </value>
         </entry>
         <entry key="\Excel_Files\Szymanski_datas\aaaa.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Excel_Files\Szymanski_datas\aaaaa.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
